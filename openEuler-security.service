@@ -1,0 +1,30 @@
+#######################################################################################
+#
+# Copyright (c) Huawei Technologies Co., Ltd. 2019. All rights reserved.
+# security-tool licensed under the Mulan PSL v2.
+# You can use this software according to the terms and conditions of the Mulan PSL v2.
+# You may obtain a copy of Mulan PSL v2 at:
+#     http://license.coscl.org.cn/MulanPSL
+# THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY OR FIT FOR A PARTICULAR
+# PURPOSE.
+# See the Mulan PSL v2 for more details.
+# Description: Security Tool Activation Service
+#
+#######################################################################################
+
+[Unit]
+Description=OpenEuler Security Tool
+After=network.target sshd.service auditd.service crond.service tuned.service NetworkManager.service
+Wants=sshd.service auditd.service rsyslog.service tuned.service NetworkManager.service
+ConditionFileIsExecutable=/usr/sbin/security-tool.sh
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=/etc/openEuler_security/security
+ExecStart=/usr/sbin/security-tool.sh -d / -c /etc/openEuler_security/security.conf -u /etc/openEuler_security/usr-security.conf -l /var/log/openEuler-security.log -s
+TimeoutSec=0
+
+[Install]
+WantedBy=multi-user.target
