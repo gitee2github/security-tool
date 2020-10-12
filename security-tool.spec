@@ -1,7 +1,7 @@
 Summary: openEuler Security Tool
 Name   : security-tool
 Version: 2.0
-Release: 1.48
+Release: 1.49
 Source0: %{name}-%{version}.tar.bz2
 Source1: security
 Source2: security.conf
@@ -120,6 +120,9 @@ fi
 %attr(0500,root,root) %{_sbindir}/security-tool.sh
 
 %changelog
+* Mon Oct 12 2020 gaoyusong <gaoyusong1@huawei.com> - 2.0-1.49
+- Use secure MACs and KexAlgorithms
+
 * Fri Jul 3 2020 openEuler Buildteam <buildteam@openEuler.org> - 2.0-1.48
 - rm zzz_openEuler_history.sh
 
