@@ -1,7 +1,7 @@
 Summary: openEuler Security Tool
 Name   : security-tool
 Version: 2.0
-Release: 1.49
+Release: 1.50
 Source0: %{name}-%{version}.tar.bz2
 Source1: security
 Source2: security.conf
@@ -51,7 +51,7 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 
 %post
-sed -i 's/password-auth$/password-auth-crond/g' /etc/pam.d/crond
+sed -i 's/system-auth$/password-auth-crond/g' /etc/pam.d/crond
 
 if [ $1 -ge 2 ]
 then
@@ -74,7 +74,7 @@ systemctl enable openEuler-security.service
 %systemd_preun openEuler-security.service
 if [ $1 -eq 0 ]
 then
-    sed -i 's/password-auth-crond$/password-auth/g' /etc/pam.d/crond
+    sed -i 's/password-auth-crond$/system-auth/g' /etc/pam.d/crond
 fi
 
 %postun
@@ -120,6 +120,9 @@ fi
 %attr(0500,root,root) %{_sbindir}/security-tool.sh
 
 %changelog
+* Mon Aug 29 2022 zhengxiaoxiao <zhengxiaoxiao2@huawei.com> - 2.0-1.50
+- fix sed keyword error in /etc/pam.d/crond
+
 * Mon Oct 12 2020 gaoyusong <gaoyusong1@huawei.com> - 2.0-1.49
 - Use secure MACs and KexAlgorithms
 
