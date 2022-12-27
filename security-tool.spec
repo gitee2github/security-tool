@@ -1,7 +1,7 @@
 Summary: openEuler Security Tool
 Name   : security-tool
 Version: 2.0
-Release: 1.50
+Release: 1.51
 Source0: %{name}-%{version}.tar.bz2
 Source1: security
 Source2: security.conf
@@ -10,7 +10,7 @@ Source4: openEuler-security.service
 Source5: usr-security.conf
 License: Mulan PSL v2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: bash setup pam util-linux binutils sudo crontabs cronie 
+Requires: bash setup pam util-linux binutils sudo crontabs cronie findutils
 Requires: shadow initscripts ca-certificates openssh rsyslog dbus-daemon
 Requires(post): systemd-units
 Requires(preun): systemd-units
@@ -120,6 +120,9 @@ fi
 %attr(0500,root,root) %{_sbindir}/security-tool.sh
 
 %changelog
+* Tue Dec 27 2022 zhengxiaoxiao <zhengxiaoxiao2@huawei.com> - 2.0-1.51
+- add requires findutils
+
 * Mon Aug 29 2022 zhengxiaoxiao <zhengxiaoxiao2@huawei.com> - 2.0-1.50
 - fix sed keyword error in /etc/pam.d/crond
 
